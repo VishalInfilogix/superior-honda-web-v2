@@ -30,7 +30,7 @@ class HomePageController extends Controller
         $promotions = Promotions::with('promotion_products.product_details.images', 'promotion_services.service_details.images', 'promotion_images')
                                 ->where('status', 'active')
                                 ->get();
-                                
+
         $testimonials  = Testimonial::all();
         $faqs  = Faq::all();
                                                
