@@ -117,11 +117,11 @@ $(document).ready(function(){
 
     $(".get_summer_ready").owlCarousel({
         items: 3,
-        loop: true,
+        loop: false,
         margin: 10,
         nav: true,
         dots: false,
-        autoplay: true,
+        autoplay: false,
         navText: [
             "<img src='./assets/images/rightArrow.png' alt='Previous'/>", 
             "<img src='./assets/images/rightArrow.png' alt='Next'/>"

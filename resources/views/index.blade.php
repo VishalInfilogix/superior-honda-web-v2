@@ -344,7 +344,7 @@
                 <div class="ra_services_provide_wraper" id="winter_service">
                     <div class="ra_red_border"></div>
                     <div class="ra_heading_section">
-                        <h2 class="ra_heading_section_data">Superior Deals!</h2>
+                        <h2 class="ra_heading_section_data">Superior Deals! {{count($promotions)}}</h2>
                     </div>
                     <div class="curate_services">
                         <promotions :promotions="{{ json_encode($promotions) }}"
