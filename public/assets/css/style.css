@@ -3981,6 +3981,25 @@ video {
     -ms-flex-align: start;
     align-items: flex-start;
 }
+.list_ra_main_listing_description {
+    display: -ms-flexbox;
+    margin-top: 5px;
+}
+.list_ra_main_listing_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px 15px;
+}
+  
+.separator {
+    border: none;
+    height: 2px;
+    background-color: #e5e7e9;
+    width: 100%;
+    margin: 5px 0;
+}
+  
 .list_ra_main_listing_dot_li {
     margin-left: 0.5rem;
     font-size: 15px;

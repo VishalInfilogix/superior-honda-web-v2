@@ -11,9 +11,11 @@
                 <img
                   loading="lazy"
                   class="list_ra_main_listing_item_datainner_imgcont"
-                  :src="product.images[0] ? this.main_web_url + product.images[0].images : '/assets/images/Standard Service Package sq.jpg'"
+                  :src="(product.images?.length > 0 && product.images[0]?.images) 
+                        ? main_web_url + product.images[0].images 
+                        : '/assets/images/Standard Service Package sq.jpg'"
                   alt="Car Standard Service"
-                  style="display:block"
+                  style="display: block"
                 />
               </div>
               <div class="list_ra_main_listing_ul">
@@ -25,32 +27,50 @@
                     <div class="list_ra_main_listing_grey_strip">{{ product.product_category.name }}</div>
                   </div>
                 </div>
-                <div class="list_ra_main_listing_dot_li" itemProp="name">
-                  • {{ product.brand.brand_name }} {{ product.model.model_name }} {{ product.variant.variant_name }} • {{ product.type.vehicle_type }}
-                </div>
+
                 <div class="list_ra_main_listing_tick_li">
-                  <div class="list_ra_main_listing_tick_li_item">
+                  <!-- <div v-if="product.brand || product.model" class="list_ra_main_listing_tick_li_item">
+                    <img loading="lazy" src="/assets/images/tick.svg" class="list_ra_main_listing_tick_li_img" alt="Included" />
+                    <div class="list_ra_main_listing_dot_li" itemProp="name">{{ product.brand?.brand_name ?? '' }}</div>
+                  </div> -->
+                  <!-- <div v-if="product.variant || product.type" class="list_ra_main_listing_tick_li_item">
+                    <img loading="lazy" src="/assets/images/tick.svg" class="list_ra_main_listing_tick_li_img" alt="Included" />
+                    <div class="list_ra_main_listing_dot_li" itemProp="name">
+                      {{ product.variant?.variant_name ?? '' }}
+                      {{ product.type?.vehicle_type ? '• ' + product.type.vehicle_type : '' }}</div>
+                  </div>
+                  <div v-if="product.cost_price" class="list_ra_main_listing_tick_li_item">
                     <img loading="lazy" src="/assets/images/tick.svg" class="list_ra_main_listing_tick_li_img" alt="Included" />
                     <div class="list_ra_main_listing_dot_li" itemProp="name">{{ product.cost_price }}</div>
                   </div>
-                  <div class="list_ra_main_listing_tick_li_item" itemProp="item">
+                  <div v-if="product.year" class="list_ra_main_listing_tick_li_item" itemProp="item">
                     <img loading="lazy" src="/assets/images/tick.svg" class="list_ra_main_listing_tick_li_img" alt="Included" />
                     <div class="list_ra_main_listing_dot_li" itemProp="name">{{ product.year || '--' }}</div>
                   </div>
-                  <div class="list_ra_main_listing_tick_li_item" itemProp="item">
+                  <div v-if="product.used_part" class="list_ra_main_listing_tick_li_item" itemProp="item">
                     <img loading="lazy" src="/assets/images/tick.svg" class="list_ra_main_listing_tick_li_img" alt="Included" />
                     <div class="list_ra_main_listing_dot_li" itemProp="name">{{ product.used_part === 0 ? 'Brand New' : 'Used Part' }}</div>
-                  </div>
-                  <div class="list_ra_main_listing_tick_li_item" itemProp="item">
+                  </div>                 
+                  <div v-if="product.supplier" class="list_ra_main_listing_tick_li_item" itemProp="item">
                     <img loading="lazy" src="/assets/images/tick.svg" class="list_ra_main_listing_tick_li_img" alt="Included" />
                     <div class="list_ra_main_listing_dot_li" itemProp="name">{{ product.supplier }}</div>
-                  </div>
+                  </div> -->
                 </div>
+                <div class="list_ra_main_listing_wrapper">
+                  <div class="list_ra_main_listing_description" itemProp="name">
+                    {{ product.short_description ?? '' }}
+                  </div>
+                  
+                  <hr class="separator" />
+                  
+                  <div class="list_ra_main_listing_description" itemProp="name" v-html="product.description"></div>
+                </div>
+
               </div>
             </div>
        
             <div class="list_ra_main_listing_addtocart">
-              <h3 class="product-cost">Price : ${{ product.cost_price }}</h3>
+              <h3 v-if="product.cost_price" class="product-cost">Price : ${{ product.cost_price }}</h3>
               <button 
                 type="button" 
                 class="btn btn-danger enquire-btn" 
