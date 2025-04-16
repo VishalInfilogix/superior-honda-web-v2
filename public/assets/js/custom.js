@@ -27,8 +27,8 @@ $(document).ready(function(){
         dots: false,
         autoplay: true,
         navText: [
-            "<img src='./assets/images/rightArrow.png' alt='Previous'/>", 
-            "<img src='./assets/images/rightArrow.png' alt='Next'/>"
+            "<img src='./../assets/images/rightArrow.png' alt='Previous'/>", 
+            "<img src='./../assets/images/rightArrow.png' alt='Next'/>"
         ],
         responsive: {
             0: {
@@ -51,8 +51,8 @@ $(document).ready(function(){
         dots: false,
         autoplay: true,
         navText: [
-            "<img src='./assets/images/rightArrow.png' alt='Previous'/>", 
-            "<img src='./assets/images/rightArrow.png' alt='Next'/>"
+            "<img src='./../assets/images/rightArrow.png' alt='Previous'/>", 
+            "<img src='./../assets/images/rightArrow.png' alt='Next'/>"
         ],
         responsive: {
             0: {
@@ -75,8 +75,8 @@ $(document).ready(function(){
         dots: false,
         autoplay: true,
         navText: [
-            "<img src='./assets/images/rightArrow.png' alt='Previous'/>", 
-            "<img src='./assets/images/rightArrow.png' alt='Next'/>"
+            "<img src='./../assets/images/rightArrow.png' alt='Previous'/>", 
+            "<img src='./../assets/images/rightArrow.png' alt='Next'/>"
         ],
         responsive: {
             0: {
@@ -123,8 +123,8 @@ $(document).ready(function(){
         dots: false,
         autoplay: false,
         navText: [
-            "<img src='./assets/images/rightArrow.png' alt='Previous'/>", 
-            "<img src='./assets/images/rightArrow.png' alt='Next'/>"
+            "<img src='./../assets/images/rightArrow.png' alt='Previous'/>", 
+            "<img src='./../assets/images/rightArrow.png' alt='Next'/>"
         ],
         responsive: {
             0: {
@@ -138,16 +138,18 @@ $(document).ready(function(){
             }
         }
     });
-    new Glide('.glide', {
-        type: 'carousel', 
-        perView: 2,  
-        autoplay: 3000, 
-        breakpoints: {
-            800: {
-                perView: 1  
+    if (document.querySelector('.glide')) {
+        new Glide('.glide', {
+            type: 'carousel', 
+            perView: 2,  
+            autoplay: 3000, 
+            breakpoints: {
+                800: {
+                    perView: 1  
+                }
             }
-        }
-    }).mount();
+        }).mount();
+    }
 
 });
 

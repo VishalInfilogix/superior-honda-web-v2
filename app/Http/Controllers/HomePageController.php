@@ -95,7 +95,6 @@ class HomePageController extends Controller
             'phone' => 'required',
             'description' => 'required',
         ]);
-
         $enquiry_data = [];
 
         $enquiry_data['customer_name'] = $request->name;
@@ -105,6 +104,7 @@ class HomePageController extends Controller
         $enquiry_data['inquiry_description'] = $request->description;
         $enquiry_data['inquiry_product_id'] = $request->product_id;
         $enquiry_data['inquiry_location_id'] = $request->location_id;
+        $enquiry_data['inquiry_details'] = !empty($request->product_selected_details) ? $request->product_selected_details : NULL;
         $enquiry_data['inquiry_created_at'] = date('Y-m-d H:i:s');
 
         $creat_enquiry = CustomerInquiry::create($enquiry_data);
@@ -136,5 +136,33 @@ class HomePageController extends Controller
     public function contactUs(){
         $locations = Location::where('disable_location', '0')->get();
         return view('contact-us',compact('locations'));
+    }
+
+    public function product_details(Request $request)
+    {
+        $locations = Location::where('disable_location', '0')->get();
+        
+        $product_category = ProductCategory::select('id', 'product_category_slug')->first();
+
+        $product_category_id = $product_category->id;
+
+        $product_category_slug = $product_category->product_category_slug;
+
+        $products = Product::with('images', 'productCategory', 'category', 'brand', 'model', 'variant', 'type')
+                            ->where('products.category_id', $product_category_id)
+                            ->where('status', 1)
+                            ->whereNull('products.deleted_at')
+                            ->select('products.id', 'product_name', 'product_code', 'hsn_no', 
+                                    'manufacture_name', 'supplier', 'quantity', 'is_oem', 'out_of_stock', 
+                                    'is_service', 'cost_price', 'description', 'short_description', 'service_icon', 
+                                    'item_number', 'used_part', 'access_series', 'year', 'popular', 'category_id', 
+                                    'vehicle_category_id', 'brand_id', 'model_id', 'type_id', 'varient_model_id')
+                            ->distinct()
+                            ->paginate(1);
+        $testimonials  = Testimonial::all();
+        $faqs  = Faq::all();
+        $product_categories = ProductCategory::whereNull('deleted_at')->get();
+
+        return view('product-details', compact('locations', 'product_category_slug', 'products', 'testimonials','faqs','product_categories'));
     }
 }

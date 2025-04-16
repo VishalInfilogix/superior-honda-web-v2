@@ -98,11 +98,9 @@
             };
         },
         methods: {
-            openModal(productId, productName, customer_inquiry_category, customer_name, email, phone_number) {        
-                this.localProductId = productId;
-                this.customerInquiryCategory = customer_inquiry_category;
-                //console.log('openModal',productName);
-                document.getElementById('selected-product-name').innerText = 'PRODUCT : '+productName;
+            openModal(brandName, modelName, fuelType, customer_name, email, phone_number) {
+                
+                document.getElementById('selected-product-name').innerText = 'PRODUCT : '+ brandName + ' ' + modelName + ' ' + fuelType;
 
                 this.formData.name = customer_name || '';
                 this.formData.phone = phone_number || '';
@@ -135,12 +133,15 @@
                 $('#enquirySubmit').prop('disabled',true);
 
                 const locationId = localStorage.getItem('location_id');
+                const product_details_raw = document.getElementById('selected-product-name').innerText;
+                const product_details = product_details_raw.replace('PRODUCT : ', '');
 
                 const formDataWithAdditionalParams = {
                     ...this.formData,
-                    product_id: this.localProductId,
+                    product_id: 1,
                     location_id: locationId,
-                    customer_inquiry_category: this.customerInquiryCategory,
+                    customer_inquiry_category: 'product',
+                    product_selected_details: product_details
                 };
 
                 const csrfToken = document.querySelector('meta[name="csrf-token"]');

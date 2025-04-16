@@ -54,7 +54,7 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'main_web_url' => env('MAIN_WEB_URL', 'http://127.0.0.1:8001/'),
+    'main_web_url' => env('MAIN_WEB_URL', 'http://127.0.0.1:8000/'),
 
     /*
     |--------------------------------------------------------------------------

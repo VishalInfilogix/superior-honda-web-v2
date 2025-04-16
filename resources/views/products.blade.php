@@ -1,4 +1,191 @@
 @extends('layout.app')
+<style>
+   #inquiryForm {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      position: relative;
+      padding-bottom: 80px;
+   }
+
+   .form-step, #finalForm {
+      margin-top: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 420px;
+   }
+
+   .step-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+   }
+
+   .step-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+   }
+
+   .step-header h3,
+   .form-step h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+      padding: 0;
+      color: #222;
+   }
+
+   .back-icon {
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #000;
+      font-weight: bold;
+      padding: 0;
+      line-height: 1;
+   }
+
+   .back-icon:hover {
+      text-decoration: none !important;
+      color: #000;
+   }
+
+   .change-btn {
+      background: none;
+      border: none;
+      color: red;
+      cursor: pointer;
+      font-size: 14px;
+      transition: transform 0.3s ease;
+      font-weight: 500;
+   }
+
+   .change-btn:hover {
+      transform: scale(1.05);
+   }
+
+   .grid-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 5px;
+      flex-grow: 1;
+   }
+
+   .grid-list::-webkit-scrollbar {
+      width: 6px;
+   }
+
+   .grid-list::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+   }
+
+   .grid-list::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+   }
+
+   .select-item {
+      width: 100px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+   }
+
+   .select-item:hover {
+      transform: scale(1.05);
+   }
+
+   .select-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      transition: transform 0.3s ease;
+   }
+
+   .select-item span {
+      font-size: 14px;
+      margin-top: 4px;
+      color: #333;
+   }
+
+   .search-bar {
+      margin: 10px 0 15px;
+      padding: 10px 14px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+   }
+
+   .d-none {
+      display: none !important;
+   }
+
+   .modal-preview img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+   }
+
+   .summary {
+      text-align: center;
+      margin-bottom: 30px;
+   }
+
+   .fuel-text {
+      color: #777;
+      font-weight: normal;
+   }
+
+   .submit-btn {
+      margin-top: auto;
+      width: 100%;
+   }
+
+   #finalForm {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      padding: 0 15px;
+   }
+   .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 5px;
+      margin-bottom: 20px;
+      margin-top: 20px;
+   }
+
+   .summary-text span {
+      font-size: 16px;
+      color: #333;
+   }
+   #summaryBrand, #summaryModel, #summaryFuel{
+      font-weight: bold;
+      font-size: 20px;
+   }
+   #summaryFuel{
+      opacity: 0.5;
+   }
+</style>
+
 @section('content')
    <div class="ra_app_store_para2">
          <div class="list_ra_main_wraper list_ra_main_wraper2">
@@ -142,10 +329,9 @@
                      </div>
                </div>
             </div>
-            <div class="ra_form_wraper ra_form2_wraper without-modal-inq" style="grid-column:2 / 3;grid-row:2 / 4;top:30px;margin-top:50px;margin-bottom:30px">
-               <h4 class="p-form-title">ENQUIRE NOW</h4>
-               @include('partials.inquire-form')
-            </div>
+            <!-- <h4 class="p-form-title">ENQUIRE NOW</h4> -->
+            <!-- @include('partials.inquire-form') -->
+            <enquiry-form-for-brands :user_details="{{ !empty(Auth::user()) ? json_encode(Auth::user()) : '' }}" :main_web_url='@json(env("MAIN_WEB_URL"))'></enquiry-form-for-brands>
             <div style="background-color:#FFFFFF">
                <div class="list_ra_main_listing_wraper" style="max-width:unset">
                      <div>
@@ -379,6 +565,5 @@
 @endsection
 @section('script')
 <script>
-
 </script>
 @endsection

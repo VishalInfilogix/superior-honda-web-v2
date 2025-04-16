@@ -9,6 +9,7 @@ import { createApp } from 'vue';
 import ProductCategoriesDisplay from './components/ProductCategoriesDisplay.vue';
 import LocationComponent from './components/LocationComponent.vue';
 import ProductsDisplay from './components/ProductsDisplay.vue';
+import EnquiryFormForBrands from './components/EnquiryModalForBrands.vue';
 import Promotions from './components/Promotions.vue';
 import 'toastr/build/toastr.min.css';
 import toastr from 'toastr';
@@ -21,6 +22,7 @@ app.component('product-categories-display', ProductCategoriesDisplay);
 app.component('location-module', LocationComponent);
 app.component('products-module', ProductsDisplay);
 app.component('promotions', Promotions);
+app.component('enquiry-form-for-brands', EnquiryFormForBrands);
 
 // Mount the app to the DOM element with the given ID
 app.mount('#app');
