@@ -270,7 +270,13 @@
     .step-header-left {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 0px;
+    }
+
+    .step-header-left button{
+        background: none;
+        border: none;
+        font-size: 16px;
     }
 
     .step-header h3,

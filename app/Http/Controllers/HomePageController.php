@@ -144,21 +144,26 @@ class HomePageController extends Controller
         
         $product_category = ProductCategory::select('id', 'product_category_slug')->first();
 
-        $product_category_id = $product_category->id;
+        $product_category_id = !empty($product_category->id) ? $product_category->id : NULL;
 
-        $product_category_slug = $product_category->product_category_slug;
+        $product_category_slug = !empty($product_category->product_category_slug) ? $product_category->product_category_slug : NULL;
 
-        $products = Product::with('images', 'productCategory', 'category', 'brand', 'model', 'variant', 'type')
-                            ->where('products.category_id', $product_category_id)
-                            ->where('status', 1)
-                            ->whereNull('products.deleted_at')
-                            ->select('products.id', 'product_name', 'product_code', 'hsn_no', 
-                                    'manufacture_name', 'supplier', 'quantity', 'is_oem', 'out_of_stock', 
-                                    'is_service', 'cost_price', 'description', 'short_description', 'service_icon', 
-                                    'item_number', 'used_part', 'access_series', 'year', 'popular', 'category_id', 
-                                    'vehicle_category_id', 'brand_id', 'model_id', 'type_id', 'varient_model_id')
-                            ->distinct()
-                            ->paginate(1);
+        if(!empty($product_category_id))
+        {
+            $products = Product::with('images', 'productCategory', 'category', 'brand', 'model', 'variant', 'type')
+                                ->where('products.category_id', $product_category_id)
+                                ->where('status', 1)
+                                ->whereNull('products.deleted_at')
+                                ->select('products.id', 'product_name', 'product_code', 'hsn_no', 
+                                        'manufacture_name', 'supplier', 'quantity', 'is_oem', 'out_of_stock', 
+                                        'is_service', 'cost_price', 'description', 'short_description', 'service_icon', 
+                                        'item_number', 'used_part', 'access_series', 'year', 'popular', 'category_id', 
+                                        'vehicle_category_id', 'brand_id', 'model_id', 'type_id', 'varient_model_id')
+                                ->distinct()
+                                ->paginate(1);
+        }else{
+            $products = [];
+        }
         $testimonials  = Testimonial::all();
         $faqs  = Faq::all();
         $product_categories = ProductCategory::whereNull('deleted_at')->get();
