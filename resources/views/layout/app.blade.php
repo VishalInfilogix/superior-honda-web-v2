@@ -265,45 +265,6 @@
             </div>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade location_modal" id="locationModal" tabindex="-1" role="dialog"
-        aria-labelledby="locationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                        id="locationModalClose">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title" id="locationModalLabel">Choose Your City</h4>
-                    <p>This would help us in providing you quick service.</p>
-                </div>
-                <div class="modal-body">
-                    <div class="ra_modal_flag text-center">
-                        <img src="{{ asset('assets/images/jamaica-flag') }}.jpg" alt=""
-                            style="max-width: 100px;">
-                        <h5>Jamaica</h5>
-                    </div>
-                    <div class="ra_location_modal clearfix">
-                        <div class="row">
-                            @if (!empty($locations))
-                                @foreach ($locations as $location)
-                                    <div class="col-sm-4 ra_location_modal_data" data-id="{{ $location->id }}"
-                                        data-location-name="{{ $location->name }}">
-                                        <a href="javascript:void(0);" class="text-center">
-                                            <img src="{{ !empty($location->location_image) ? env('MAIN_WEB_URL') . $location->location_image : asset('assets/images/gurgaon-dev.png') }}"
-                                                alt="">
-                                            <h5>{{ $location->name }}</h5>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="authModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -370,6 +331,45 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade location_modal" id="locationModal" tabindex="-1" role="dialog"
+        aria-labelledby="locationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        id="locationModalClose">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="locationModalLabel">Choose Your City</h4>
+                    <p>This would help us in providing you quick service.</p>
+                </div>
+                <div class="modal-body">
+                    <div class="ra_modal_flag text-center">
+                        <img src="{{ asset('assets/images/jamaica-flag') }}.jpg" alt=""
+                            style="max-width: 100px;">
+                        <h5>Jamaica</h5>
+                    </div>
+                    <div class="ra_location_modal clearfix">
+                        <div class="row">
+                            @if (!empty($locations))
+                                @foreach ($locations as $location)
+                                    <div class="col-sm-4 ra_location_modal_data" data-id="{{ $location->id }}"
+                                        data-location-name="{{ $location->name }}">
+                                        <a href="javascript:void(0);" class="text-center">
+                                            <img src="{{ !empty($location->location_image) ? env('MAIN_WEB_URL') . $location->location_image : asset('assets/images/gurgaon-dev.png') }}"
+                                                alt="">
+                                            <h5>{{ $location->name }}</h5>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
@@ -459,6 +459,19 @@
                 $("#locationModalClose").click();
             });
         });
+
+        $(document).ready(function () {
+            $('#locationModal').on('shown.bs.modal', function () {
+                $('.modal-backdrop').remove();
+            });
+        });
+
+        $(document).ready(function () {
+            $('#authModal').on('shown.bs.modal', function () {
+                $('.modal-backdrop').remove();
+            });
+        });
+
     </script>
 
     <script>

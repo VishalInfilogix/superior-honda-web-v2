@@ -80,7 +80,7 @@
                </div>
             </div>
     <enquiry-form-for-brands :user_details="{{ !empty(Auth::user()) ? json_encode(Auth::user()) : '' }}" :main_web_url='@json(env("MAIN_WEB_URL"))'></enquiry-form-for-brands>
-    <div style="background-color:#FFFFFF">
+    <div style="background-color:#FFFFFF; z-index: 1;">
         <div class="list_ra_main_listing_wraper" style="max-width:unset">
             @include('partials.product-details')
         </div>

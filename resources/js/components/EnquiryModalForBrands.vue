@@ -1,6 +1,6 @@
 <template>
     
-    <div class="ra_form_wraper ra_form2_wraper without-modal-inq" style="grid-column:2 / 3;grid-row:2 / 4;top:30px;margin-top:50px;margin-bottom:30px">
+    <div class="ra_form_wraper ra_form2_wraper without-modal-inq" style="grid-column:2 / 3;grid-row:2 / 4;top:30px;margin-top:50px;margin-bottom:30px; z-index: 1;">
         <!-- Step 1: Select Manufacturer -->
         <div v-show="currentStep === 1" class="form-step">
             <div class="step-header">

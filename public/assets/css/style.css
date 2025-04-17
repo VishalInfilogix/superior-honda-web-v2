@@ -249,7 +249,7 @@ html {
 .list_ra_scrolpy_slider_wraper {
     position: sticky;
     top: 0;
-    z-index: 4;
+    z-index: 1;
 }
 @media (min-width: 1024px) {
     .list_ra_scrolpy_slider_data {
@@ -13454,7 +13454,7 @@ div.active-category {
     font-size: 18px;
     color: #555;
     margin-top: 5px;
-    line-height: 1.5;
+    line-height: 1.2;
 }
 
 .terms-heading {
@@ -13473,7 +13473,7 @@ div.active-category {
     color: #444;
     display: flex;
     align-items: flex-start;
-    line-height: 2.5;
+    line-height: 1.5;
 }
 .terms-list .icon {
     background: #facc15;
@@ -13483,7 +13483,7 @@ div.active-category {
     font-size: 12px;
     margin-right: 10px;
     line-height: 1;
-    margin-top: 13px;
+    margin-top: 3px;
 }
 
 .warranty-btn {
