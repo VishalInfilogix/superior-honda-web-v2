@@ -60,7 +60,7 @@
                 class="select-item"
                 @click="selectFuel(fuel)"
             >
-                <img :src="`/assets/images/fuels/${fuel.toLowerCase()}.svg`" :alt="fuel" />
+                <img :src="`/assets/images/fuels/${fuel.toUpperCase()}.svg`" :alt="fuel" />
                 <span>{{ fuel }}</span>
             </div>
             </div>
@@ -316,7 +316,7 @@
         padding-right: 5px;
         flex-grow: 1;
     }
-    
+
     @media (max-width: 1349px) {
         .grid-list {
             gap: 0px;
