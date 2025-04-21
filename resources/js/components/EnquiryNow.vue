@@ -144,12 +144,15 @@
                 $('#enquirySubmit').prop('disabled',true);
 
                 const locationId = localStorage.getItem('location_id');
+                const product_details_raw = document.getElementById('selected-product-name').innerText;
+                const product_details = product_details_raw.replace('PRODUCT : ', '');
 
                 const formDataWithAdditionalParams = {
                     ...this.formData,
                     product_id: this.localProductId,
                     location_id: locationId,
                     customer_inquiry_category: this.customerInquiryCategory,
+                    product_selected_details: product_details
                 };
 
                 const csrfToken = document.querySelector('meta[name="csrf-token"]');
