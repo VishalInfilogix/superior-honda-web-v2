@@ -12746,10 +12746,10 @@ button.submit-btn:hover {
     margin-bottom: 20px;
 }
 .without-modal-inq {
-    padding: 40px 40px;
+    padding: 20px 40px;
     border: 1px solid #0000001a;
     box-shadow: rgba(0, 0, 0, 0.15) 0px -0.25rem 0.875rem 0px, rgba(0, 0, 0, 0.12) 0px 0.0625rem 0.625rem 0px, rgba(0, 0, 0, 0.2) 0px 0.25rem 0.9375rem 0.3125rem;
-    height: 500px;
+    height: 600px;
 }
 
 .ra_footer_bottom_grid.ra_footer_bottom_gary_dark {
@@ -13569,10 +13569,11 @@ div.active-category {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    max-height: 300px;
+    max-height: 430px;
     overflow-y: auto;
     padding-right: 5px;
     flex-grow: 1;
+    padding-top: 15px;
  }
 
  .grid-list::-webkit-scrollbar {
@@ -13680,4 +13681,20 @@ div.active-category {
  }
  #summaryFuel{
     opacity: 0.5;
+ }
+
+ .summary-botom{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 25px;
+ }
+
+ .summary-botom .empty-cart-img-div img{
+    height: 200px;
+ }
+ .summary-botom p{
+    margin-top: 15px;
+    font-size: 16px;
  }

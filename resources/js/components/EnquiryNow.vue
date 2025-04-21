@@ -101,8 +101,17 @@
             openModal(productId, productName, customer_inquiry_category, customer_name, email, phone_number) {        
                 this.localProductId = productId;
                 this.customerInquiryCategory = customer_inquiry_category;
-                //console.log('openModal',productName);
-                document.getElementById('selected-product-name').innerText = 'PRODUCT : '+productName;
+                
+                const selectedBrand = localStorage.getItem('selectedBrand');
+                const selectedModel = localStorage.getItem('selectedModel');
+                const selectedFuel = localStorage.getItem('selectedFuel');
+
+                if(selectedBrand && selectedModel && selectedFuel)
+                {
+                    document.getElementById('selected-product-name').innerText = 'PRODUCT : '+ selectedBrand + ' ' + selectedModel + ' ' + selectedFuel;
+                }else{
+                    document.getElementById('selected-product-name').innerText = 'PRODUCT : '+productName;   
+                }
 
                 this.formData.name = customer_name || '';
                 this.formData.phone = phone_number || '';

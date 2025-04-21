@@ -60,7 +60,7 @@
                 class="select-item"
                 @click="selectFuel(fuel)"
             >
-                <img :src="`/assets/images/fuels/${fuel.toLowerCase()}.png`" :alt="fuel" />
+                <img :src="`/assets/images/fuels/${fuel.toLowerCase()}.svg`" :alt="fuel" />
                 <span>{{ fuel }}</span>
             </div>
             </div>
@@ -69,30 +69,27 @@
         <!-- Step 4: Summary & Inquire -->
         <div v-show="currentStep === 4" class="form-step">
             <div class="modal-preview">
-            <img :src="summaryImage" alt="Selected model" />
+                <img :src="summaryImage" alt="Selected model" />
             </div>
 
             <div class="summary-row">
-            <div class="summary-text">
-                <span><strong>{{ selectedBrand }}</strong> <strong>{{ selectedModel }}</strong> <span class="fuel-text">{{ selectedFuel }}</span></span>
+                <div class="summary-text">
+                    <span><strong>{{ selectedBrand }}</strong> <strong>{{ selectedModel }}</strong> <span class="fuel-text">{{ selectedFuel }}</span></span>
+                </div>
+                <button type="button" class="change-btn" @click="resetForm">Change</button>
             </div>
-            <button type="button" class="change-btn" @click="resetForm">Change</button>
+
+            <div class="summary-botom">
+                <div class="empty-cart-img-div">
+                    <img src="/assets/images/EMPTY-CART.svg" alt="">
+                </div>
+                <p>Go ahead and book a service for your car.</p>
             </div>
-            <button 
-                type="button" 
-                class="btn btn-danger submit-btn" 
-                data-toggle="modal" 
-                data-target="#enquireNowModal" 
-                @click="openEnquiryModal()">
-                Inquire Now
-            </button>
         </div>
     </div>
-    <EnquiryNow ref="enquiryNow" />
 </template>
   
 <script>
-    import EnquiryNow from './EnquiryNowForBrands.vue';
     export default {
         data() {
             return {
@@ -166,6 +163,7 @@
                     {'name': 'Vento', 'img': 'vento-car.jfif'},
                 ],
                 fuels: ['Petrol', 'CNG', 'Diesel'],
+                summaryImage: '',
             };
         },
         computed: {
@@ -177,16 +175,16 @@
             },
             filteredFuels() {
                 return this.fuels.filter(fuel => fuel.toLowerCase().includes(this.fuelSearch.toLowerCase()));
-            },
-            summaryImage() {
-                const modelImg = localStorage.getItem('modelImg');
-                const brandImg = localStorage.getItem('brandImg');
-                return modelImg
-                ? `/assets/images/cars/${modelImg}`
-                : `/assets/images/logos/${brandImg}`;
             }
         },
         methods: {
+            updateSummaryImage() {
+                const modelImg = localStorage.getItem('modelImg');
+                const brandImg = localStorage.getItem('brandImg');
+                this.summaryImage = modelImg
+                    ? `/assets/images/cars/${modelImg}`
+                    : `/assets/images/logos/${brandImg}`;
+            },
             selectBrand(brand) {
                 this.selectedBrand = brand.name;
                 localStorage.setItem('selectedBrand', this.selectedBrand);
@@ -202,6 +200,7 @@
             selectFuel(fuel) {
                 this.selectedFuel = fuel;
                 localStorage.setItem('selectedFuel', this.selectedFuel);
+                this.updateSummaryImage();
                 this.goToStep(4);
             },
             goToStep(step) {
@@ -221,24 +220,12 @@
                 this.selectedFuel = '';
                 this.goToStep(1);
             },
-            openEnquiryModal() {
-                const customer_first_name = this.user_details && this.user_details.first_name ? this.user_details.first_name : '';
-                const customer_last_name = this.user_details && this.user_details.last_name ? this.user_details.last_name : '';
-                const customer_name = this.user_details ? (customer_first_name) + (customer_last_name ? ' ' + customer_last_name : '') : '';
-                const email = this.user_details && this.user_details.email ? this.user_details.email : '';
-                const phone_number = this.user_details && this.user_details.phone_number ? this.user_details.phone_number : '';
-
-                // Pass productName to the EnquiryNow component
-                this.$refs.enquiryNow.openModal(this.selectedBrand, this.selectedModel, this.selectedFuel, customer_name, email, phone_number);
-            }
         },
         mounted() {
             if (this.selectedBrand && this.selectedModel && this.selectedFuel) {
+                this.updateSummaryImage();
                 this.goToStep(4);
             }
-        },
-        components: {
-            EnquiryNow,
         },
     };
 </script>
@@ -277,6 +264,8 @@
         background: none;
         border: none;
         font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 5px;
     }
 
     .step-header h3,
@@ -322,10 +311,16 @@
         display: flex;
         flex-wrap: wrap;
         gap: 15px;
-        max-height: 300px;
+        max-height: 430px;
         overflow-y: auto;
         padding-right: 5px;
         flex-grow: 1;
+    }
+    
+    @media (max-width: 1349px) {
+        .grid-list {
+            gap: 0px;
+        }
     }
 
     .grid-list::-webkit-scrollbar {
@@ -399,7 +394,7 @@
 
     .fuel-text {
         color: #777;
-        font-weight: normal;
+        font-weight: bold;
     }
 
     .submit-btn {
@@ -424,8 +419,13 @@
     }
 
     .summary-text span {
-        font-size: 16px;
-        color: #333;
+        font-size: 21px;
+        font-weight: bold;
+        color: black;
+    }
+
+    .summary-text span .fuel-text {
+        color: #979595;
     }
     #summaryBrand, #summaryModel, #summaryFuel{
         font-weight: bold;
