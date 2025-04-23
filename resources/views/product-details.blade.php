@@ -48,7 +48,7 @@
                                $activeCategory = null;
                                $otherCategories = [];
                                foreach ($product_categories as $key => $product_category) {
-                                   if (request()->route('slug') == $product_category->product_category_slug) {
+                                   if ($product_category_slug == $product_category->product_category_slug) {
                                        $activeCategory = $product_category;
                                    } else {
                                        $otherCategories[] = $product_category;

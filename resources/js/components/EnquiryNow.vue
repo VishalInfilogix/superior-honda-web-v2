@@ -16,18 +16,29 @@
           </div>
           <form @submit.prevent="handleSubmit">
             <div class="modal-body">
-              <h6 id="selected-product-name"></h6>
-              <div class="form-group">
-				<div class="ra_form_input custom"><input
-                  type="text"
-                  id="name"
-                  v-model="formData.name"
-                  @input="clearError('name')"
-                  placeholder="ENTER YOUR NAME"
-                  :class="{ 'is-invalid': errors.name }"
-                /></div>
-                <div v-if="errors.name" class="error-message">{{ errors.name }}</div>
-              </div>
+                <h6 id="selected-product-name"></h6>
+                <div class="form-group" v-if="showVehicleDetails">
+                    <div class="ra_form_input custom">
+                        <input
+                        type="text"
+                        :value="vehicleDetails"
+                        disabled
+                        class="disabled-field"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="ra_form_input custom"><input
+                    type="text"
+                    id="name"
+                    v-model="formData.name"
+                    @input="clearError('name')"
+                    placeholder="ENTER YOUR NAME"
+                    :class="{ 'is-invalid': errors.name }"
+                    /></div>
+                    <div v-if="errors.name" class="error-message">{{ errors.name }}</div>
+                </div>
   
               <div class="form-group">
 				<div class="ra_form_input custom">
@@ -95,6 +106,8 @@
                 errors: {},
                 localProductId: null, 
                 customerInquiryCategory: null,
+                vehicleDetails: '',
+                showVehicleDetails: false,
             };
         },
         methods: {
@@ -106,11 +119,15 @@
                 const selectedModel = localStorage.getItem('selectedModel');
                 const selectedFuel = localStorage.getItem('selectedFuel');
 
-                if(selectedBrand && selectedModel && selectedFuel)
-                {
-                    document.getElementById('selected-product-name').innerText = 'PRODUCT : '+ selectedBrand + ' ' + selectedModel + ' ' + selectedFuel;
-                }else{
-                    document.getElementById('selected-product-name').innerText = 'PRODUCT : '+productName;   
+                
+                document.getElementById('selected-product-name').innerText = 'PRODUCT : '+productName;
+
+                if (selectedBrand && selectedModel && selectedFuel) {
+                    this.vehicleDetails = `${selectedBrand} ${selectedModel} ${selectedFuel}`;
+                    this.showVehicleDetails = true;
+                } else {
+                    this.vehicleDetails = '';
+                    this.showVehicleDetails = false;
                 }
 
                 this.formData.name = customer_name || '';
@@ -136,6 +153,8 @@
                     email: '',
                     description: ''
                 };
+                this.vehicleDetails = '';
+                this.showVehicleDetails = false;
             },
             async handleSubmit() {
                 if (!this.validateForm()) {
@@ -152,7 +171,7 @@
                     product_id: this.localProductId,
                     location_id: locationId,
                     customer_inquiry_category: this.customerInquiryCategory,
-                    product_selected_details: product_details
+                    product_selected_details: this.vehicleDetails
                 };
 
                 const csrfToken = document.querySelector('meta[name="csrf-token"]');

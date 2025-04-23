@@ -21,7 +21,8 @@
               <div class="list_ra_main_listing_ul">
                 <div class="list_ra_main_listing_ul_mar" style="margin-bottom:15px">
                   <div class="list_ra_main_listing_ul_head">
-                    <a href="/product-details" style="margin:0" class="list_ra_main_listing_ul_head_cont">{{ product.product_name }}</a>
+                    <a :href="`/product-category/${product.product_category.name}/${product.product_name}`" style="margin:0" class="list_ra_main_listing_ul_head_cont">{{ product.product_name }}</a>
+
                   </div>
                   <div class="list_ra_main_listing_ul_img">
                     <div class="list_ra_main_listing_grey_strip">{{ product.product_category.name }}</div>

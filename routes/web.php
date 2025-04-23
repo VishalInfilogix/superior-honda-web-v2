@@ -34,4 +34,6 @@ Route::get('/products', function () {
     return view('productsOld');
 });
 
+
+Route::get('/product-category/{cat}/{product}', [HomePageController::class, 'product_details'])->name('product-details');
 Route::get('/product-details', [HomePageController::class, 'product_details'])->name('product-details');
